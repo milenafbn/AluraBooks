@@ -1,0 +1,169 @@
+.cabecalho__menu-hamburguer{
+    width: 32px;
+    height: 32px;
+    background-image: url(../img/Menu.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block; /*se fosse apenas inline não iria permitir os ajustes de widht e height*/
+}
+
+.container__botao:checked ~ .container__rotulo > .cabecalho__menu-hamburguer{
+    background-image: url("../img/Menu Aberto.svg");
+} /*o ~ busca o proximo elemento com essa classe e o > procura algo que esta dentro do elemento anterior*/
+
+.container__botao:checked ~ .container__rotulo{
+    background: var(--azul-degrade);
+}
+
+.cabecalho{
+    background-color: var(--branco);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; /*permite organizar a lista (programação, front-end, infraestrutura etc), ja que é o primeiro elemento sem ser static antes da .lista-menu e pai dela*/
+}
+
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.container__imagem{
+    padding: 1em;
+}
+
+.lista-menu{
+    display: none; /*faz sumir a barra de ferramenta com a lista de "programação, design, front ed etc*/
+    position: absolute;
+    top: 100%; /*tira 100% do cabeçalho e deixa a lista em baixo (fora do cabeçalho), por isso o relative no .cabecalho, para liberar o absolute e conseguir movimentar 100% pra baixo do cabeçalho*/
+    width: 60vw; /*o vw pega a largura da tela, nessa caso ocupndo 60% dela*/
+}
+
+/*condicional CSS*/
+.container__botao:checked~.lista-menu{ /*é o que faz aparecer essa lista quando for selecionada (check)*/
+    /*explicação de como funciona: se o container__botao estiver checked, ele vai procurar outro que venha depois dele (~) que tenha a classe lista-menu e coloca display:block nele*/
+    display: block;
+}
+
+.lista-menu__titulo, .lista-menu__item{
+    padding: 1em;
+    background-color: var(--branco);
+}
+
+.lista-menu__titulo{
+    color: var(--laranja);
+    font-weight: 700;
+}
+
+.lista-menu__link{
+    text-decoration: none;
+    background: var(--azul-degrade);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text; /*aplica a cor do background só onde tem texto :0 uauu*/
+    text-transform: uppercase;
+}
+
+.container__botao{
+    display: none; /*tira a caixa do check*/
+}
+
+/*Tirando elementos do layout mobile que só devem aparecer em outros tamanhos de dispositivos*/
+
+.container__titulo{
+    display: none;
+}
+
+.opcoes{
+    display: none;
+}
+
+.container__texto{
+    display: none;
+}
+
+@media screen and (min-width: 1024px) {
+    .container__titulo, .container__titulo--negrito{
+        font-family: var(--fonte-secudaria);
+        font-size: 30px;
+    }
+
+    .container__titulo{
+        font-weight: 400;
+        display: block; /*para ele aparecer pois com o display none ele sumiu em tudo*/
+    }
+
+    .container__titulo--negrito{
+        font-weight: 700;
+    }
+
+    .opcoes{
+        display: flex;
+    }
+
+    .opcoes__item{
+        padding: 0 1em;
+        text-transform: uppercase;
+    }
+
+    .opcoes__link{
+        text-decoration: none;
+        color: var(--preto);
+    }
+
+    .container__imagem-transparente, .cabecalho__menu-hamburguer{
+        display: none;
+    }
+
+    .opcoes__botao:checked ~ .lista-menu{
+        display: block;
+        width: auto; /*preechendo só o espaço necessário*/
+    }
+
+    .opcoes__botao{
+        display: none;
+    }
+
+    .opcoes__botao:checked ~ .opcoes__rotulo > .opcoes__item{
+        background: var(--azul-degrade);
+        color: var(--branco);
+    }
+
+    .opcoes__item{
+        padding: 2em 1em;
+    }
+
+    .lista-menu__item:hover{
+        background: var(--azul-degrade);
+    }
+
+    .lista-menu__item:hover > .lista-menu__link{
+        -webkit-text-fill-color: var(--branco);
+        text-decoration: none;
+    }
+
+}
+
+@media screen and (min-width:1728px) {
+    .container__link{
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: var(--preto);
+    }
+
+    .cabecalho{
+        padding: 0 2em;
+    }
+
+    .opcoes{
+        margin-right: auto; /*com essa configuração (?) todo o conteudo será jogado para o espaço que sobra a direita*/
+    }
+
+    .container__texto{
+        display: block;
+    }
+}
+
+
+
